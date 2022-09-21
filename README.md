@@ -21,7 +21,7 @@ image
 * Small edits are welcome! Please submit a Pull-Request. See also [CONTRIBUTING.md](./CONTRIBUTING.md)
 * For larger edits, please submit an issue, and we will create a branch for you. Then, get the code reviewed (in the branch) before submitting.
 
-##Level  1:  Associate Cloud Engineer
+## Level  1:  Associate Cloud Engineer
 Get started by collecting Google skill badges in the 4 core areas (Create and Manage Cloud Resources - Perform Foundational Infrastructure Tasks in Google Cloud -  Build and Secure Networks in Google Cloud - Perform Foundational Data, ML, and AI Tasks in Google Cloud)
 
 ![](images/1.png)
@@ -43,7 +43,7 @@ Overview: What is machine learning and what kinds of problems can it solve? Goog
 
 
 ### 1 [How Google Does Machine Learning](https://drive.google.com/file/d/1mTCgQclOqbX4CoGtBsKN3r7s3ElENsBu/view?usp=sharing)
-###  2 [Launching into Machine Learning](https://www.cloudskillsboost.google/course_templates/125)
+### 2 [Launching into Machine Learning](https://www.cloudskillsboost.google/course_templates/125)
 ### 3  [TensorFlow on Google Cloud](https://www.cloudskillsboost.google/quests/83?locale=en)
 ### 4  [Feature Engineering](https://www.cloudskillsboost.google/course_templates/11)
 ### 5  [Machine Learning in the Enterprise](https://www.cloudskillsboost.google/course_templates/9)
