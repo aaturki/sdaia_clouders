@@ -14,7 +14,7 @@ Google is leading the learning for this program and provides you with a project-
 
 This program is a national project that aims at spreading the technical knowledge and understanding for the cloud, AI & ML in the Kingdom and helping you to gain cloud experience that is required in all fields nowadays.
 
-![Vertex AI](./images/vertex-ai-overview.png "Vertex AI Overview")
+![Vertex AI](./images/Screen Shot 2022-08-15 at 12.59.41 PM.png "Vertex AI Overview")
 
  
 Level 1 (Associate Cloud Engineer): Get started with Google Cloud training by completing the fundamentals of Google Cloud and learn how to deploy applications, monitor operations and manage enterprise applications through Coursera courses which leads you at the end to get the Associate Cloud Engineer certification
