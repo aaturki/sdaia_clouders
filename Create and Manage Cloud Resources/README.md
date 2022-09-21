@@ -180,10 +180,6 @@ gcloud compute instances create nucleus-jumphost \
           --machine-type f1-micro  \
           --image-family debian-9  \
           --image-project debian-cloud
-```
-Task 2 :
-```
-
 
 ```
  Part 1 :
