@@ -1,119 +1,112 @@
-# Vertex AI: Qwik Start
+### Program Overview
 
-In this lab, you will use [BigQuery](https://cloud.google.com/bigquery) for data processing and exploratory data analysis and the [Vertex AI](https://cloud.google.com/vertex-ai) platform to train and deploy a custom TensorFlow Regressor model to predict customer lifetime value (CLV). The goal of the lab is to introduce Vertex AI through a high value real world use case - predictive CLV. You will start with a local BigQuery and TensorFlow workflow you may already be familiar with and progress toward training and deploying your model in the cloud with Vertex AI as well as retrieving predictions and explanations from your model.
+##Program Description
+
+Cloud development is the foundation for leveraging the power of AI.  This program is called “Clouder” which takes you from fundamentals to the advanced level of Google Cloud. The program uses engaging videos, labs, in-person and online lessons to teach you comprehensive topics and to prepare you for the following certificates: 
+
+1. Associate cloud engineer certificate
+
+2. Professional data engineer certificate.
+
+Google is leading the learning for this program and provides you with a project-based approach for Learning, helps you retain information better, and gives you valuable experience building things in the cloud, so you’re better prepared to bring your new skills to bear in your day-to-day work and enhance your future career.
+
+## Program  Overview
+
+This program is a national project that aims at spreading the technical knowledge and understanding for the cloud, AI & ML in the Kingdom and helping you to gain cloud experience that is required in all fields nowadays.
 
 ![Vertex AI](./images/vertex-ai-overview.png "Vertex AI Overview")
 
-Vertex AI is Google Cloud's next generation, unified platform for machine learning development and the successor to AI Platform announced at Google I/O in May 2021. By developing machine learning solutions on Vertex AI, you can leverage the latest ML pre-built components and AutoML to significantly enhance development productivity, the ability to scale your workflow and decision making with your data, and accelerate time to value.
+ 
+Level 1 (Associate Cloud Engineer): Get started with Google Cloud training by completing the fundamentals of Google Cloud and learn how to deploy applications, monitor operations and manage enterprise applications through Coursera courses which leads you at the end to get the Associate Cloud Engineer certification
+Level 2 (Professional Data Engineer 1/2): In this level you will experiment with end-to-end machine learning on Google Cloud, starting from building a machine learning-focused strategy and progressing into model training, optimization, and productionalization.
+Level 3 (Professional Data Engineer 2/2): In this level you will be able to design, build, operationalize, secure, and monitor data processing systems with a particular emphasis on security and compliance; scalability and efficiency; reliability and fidelity; and flexibility and portability
+image
+* Small edits are welcome! Please submit a Pull-Request. See also [CONTRIBUTING.md](./CONTRIBUTING.md)
+* For larger edits, please submit an issue, and we will create a branch for you. Then, get the code reviewed (in the branch) before submitting.
 
-## Learning objectives
+##Level  1:  Associate Cloud Engineer
+Get started by collecting Google skill badges in the 4 core areas (Create and Manage Cloud Resources - Perform Foundational Infrastructure Tasks in Google Cloud -  Build and Secure Networks in Google Cloud - Perform Foundational Data, ML, and AI Tasks in Google Cloud)
 
-* Train a TensorFlow model locally in a hosted [**Vertex Notebook**](https://cloud.google.com/vertex-ai/docs/general/notebooks?hl=sv).
-* Create a [**managed Tabular dataset**](https://cloud.google.com/vertex-ai/docs/training/using-managed-datasets?hl=sv) artifact for experiment tracking.
-* Containerize your training code with [**Cloud Build**](https://cloud.google.com/build) and push it to [**Google Cloud Artifact Registry**](https://cloud.google.com/artifact-registry).
-* Run a [**Vertex AI custom training job**](https://cloud.google.com/vertex-ai/docs/training/custom-training) with your custom model container.
-* Use [**Vertex TensorBoard**](https://cloud.google.com/vertex-ai/docs/experiments/tensorboard-overview) to visualize model performance.
-* Deploy your trained model to a [**Vertex Online Prediction Endpoint**](https://cloud.google.com/vertex-ai/docs/predictions/getting-predictions) for serving predictions.
-* Request an online prediction and explanation and see the response.
+![Vertex AI](./images/vertex-ai-overview.png "Vertex AI Overview")
 
-## Setup
+#This level includes the following courses:
 
-### 1. Enable Cloud Services utilized in the lab environment:
-
-#### 1.1 Launch [Cloud Shell](https://cloud.google.com/shell/docs/launching-cloud-shell)
-
-#### 1.2 Set your Project ID
-
-Confirm that you see the desired project ID returned below:
-```
-gcloud config get-value project
-```
-
-If you do not see your desired project ID, set it as follows:
-```
-PROJECT_ID=[YOUR PROJECT ID]
-gcloud config set project $PROJECT_ID
-```
-
-#### 1.3 Use `gcloud` to enable the services
-
-```
-gcloud services enable \
-  compute.googleapis.com \
-  iam.googleapis.com \
-  iamcredentials.googleapis.com \
-  monitoring.googleapis.com \
-  logging.googleapis.com \
-  notebooks.googleapis.com \
-  aiplatform.googleapis.com \
-  bigquery.googleapis.com \
-  artifactregistry.googleapis.com \
-  cloudbuild.googleapis.com \
-  container.googleapis.com
-```
-
-### 2. Create Vertex AI custom service account for Vertex Tensorboard experiment tracking
-
-#### 2.1. Create custom service account
-```
-SERVICE_ACCOUNT_ID=vertex-custom-training-sa
-gcloud iam service-accounts create $SERVICE_ACCOUNT_ID  \
-    --description="A custom service account for Vertex custom training with Tensorboard" \
-    --display-name="Vertex AI Custom Training"
-```
-
-#### 2.2. Grant it access to GCS for writing and retrieving Tensorboard logs
-```
-PROJECT_ID=$(gcloud config get-value core/project)
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
-    --role="roles/storage.admin"
-```
-
-#### 2.3. Grant it access to your BigQuery data source to read data into your TensorFlow model
-```
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
-    --role="roles/bigquery.admin"
-```
-
-#### 2.4. Grant it access to Vertex AI for running model training, deployment, and explanation jobs
-```
-gcloud projects add-iam-policy-binding $PROJECT_ID \
-    --member=serviceAccount:$SERVICE_ACCOUNT_ID@$PROJECT_ID.iam.gserviceaccount.com \
-    --role="roles/aiplatform.user"
-```
-
-### 3. Creating a Vertex Notebooks instance
-
-An instance of **Vertex Notebooks** is used as a primary lab environment.
-
-To provision the instance follow the [Create an new notebook instance](https://cloud.google.com/vertex-ai/docs/general/notebooks) setup guide. Use the *TensorFlow Enterprise 2.3* no-GPU image. Leave all other settings at their default values.
-
-After the instance is created, you can connect to [JupyterLab](https://jupyter.org/) IDE by clicking the *OPEN JUPYTERLAB* link in the [Vertex AI Notebooks Console](https://console.cloud.google.com/vertex-ai/notebooks/instances).
+### 1 [Create and Manage Cloud Resources](https://www.cloudskillsboost.google/quests/120?catalog_rank=%7B%22rank%22%3A2%2C%22num_filters%22%3A0%2C%22has_search%22%3Afalse%7D)
+###  2 [Perform Foundational Infrastructure Tasks in Google Cloud](https://www.cloudskillsboost.google/quests/118?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&search_id=17284732)
+### 3  [Build and Secure Networks in Google Cloud](https://www.cloudskillsboost.google/quests/128?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&search_id=17284749)
+### 4  [Perform Foundational Data, ML, and AI Tasks in Google Cloud](https://www.cloudskillsboost.google/quests/117?catalog_rank=%7B%22rank%22%3A1%2C%22num_filters%22%3A0%2C%22has_search%22%3Atrue%7D&search_id=17284763)
 
 
-### 4. Clone the lab repository
+## Level 2: Professional Data engineer 1/2
 
-In your **JupyterLab** instance, open a terminal and clone this repository in the `home` folder.
-```
-cd
-git clone https://github.com/GoogleCloudPlatform/training-data-analyst.git
-```
+At this level, the 100 Certified Google Associate Cloud Engineers will have Instructor-led Classroom Training.
 
-### 5. Install the lab dependencies
+Overview: What is machine learning and what kinds of problems can it solve? Google thinks about machine learning slightly differently -- of being about logic, rather than just data. We talk about why such a framing is useful when thinking about building a pipeline of machine learning models. In this course, you will experiment with end-to-end machine learning on Google Cloud, starting from building a machine learning-focused strategy and progressing into model training, optimization, and production.
 
-Run the following in the **JupyterLab** terminal to go to the `training-data-analyst/self-paced-labs/vertex-ai/vertex-ai-qwikstart` folder, then pip install `requirements.txt` to install lab dependencies:
+How Google Does Machine Learning
+Launching into Machine Learning
+TensorFlow on Google Cloud
+Feature Engineering
+Machine Learning in the Enterprise
 
-```bash
-cd training-data-analyst/self-paced-labs/vertex-ai/vertex-ai-qwikstart
-pip install -U -r requirements.txt
-```
+##Level 3: Professional Data engineer 2/2
+Overview: A Professional Data Engineer enables data-driven decision-making by collecting, transforming, and publishing data. A data engineer should be able to design, build, operationalize, secure, and monitor data processing systems with a particular emphasis on security and compliance; scalability and efficiency; reliability and fidelity; and flexibility and portability. A data engineer should also be able to leverage, deploy, and continuously train pre-existing machine learning models.
 
-### 6. Navigate to lab notebook
+At this level, the participants will attend Professional Data Engineer to cover the following:
 
-In your **JupyterLab** instance, navigate to __training-data-analyst__ > __self-paced-labs__ > __vertex-ai__ > __vertex-ai-qwikstart__, and open __lab_exercise.ipynb__.
+the Professional Data Engineer Exam Guide
+Review the Professional Data Engineer Sample Questions
+Google Cloud Fundamentals: Big Data and Machine Learning
+Modernizing
+Data Lakes and Data Warehouses with GCP
+Building
+Batch Data Pipelines on GCP
+Knowledge consolidation & skills application
+Analytics, AI &ML
+Knowledge consolidation & skills application
+### Try out the code on Google Cloud Platform
+[![Open in Cloud Shell](http://gstatic.com/cloudssh/images/open-btn.png)](https://console.cloud.google.com/cloudshell/open?git_repo=https://github.com/GoogleCloudPlatform/training-data-analyst.git)
 
-Open `lab_exercise.ipynb` to complete the lab. 
+## Courses
+Code for the following courses is included in this repo:
 
-Happy coding!
+### Google Cloud Platform Big Data and Machine Learning Fundamentals
+#### Course
+https://cloud.google.com/training/courses/data-ml-fundamentals
+
+#### Code
+1. [GCP Big Data & Machine Learning Fundamentals](CPB100)
+
+### Data Engineering on Google Cloud Platform
+#### Course
+https://cloud.google.com/training/courses/data-engineering
+
+#### Code
+1. [Leveraging unstructured data](courses/unstructured)
+2. [Serverless Data Analysis](courses/data_analysis)
+3. [Serverless Machine Learning](courses/machine_learning)
+4. [Resilient streaming systems](courses/streaming)
+
+
+### Machine Learning on Google Cloud Platform (& Advanced ML on GCP)
+#### Courses
+1. https://www.coursera.org/learn/google-machine-learning
+2. https://www.coursera.org/specializations/advanced-machine-learning-tensorflow-gcp
+
+#### Codes
+1. [How Google Does ML](courses/machine_learning/deepdive/01_googleml)
+2. [Launching into ML](courses/machine_learning/deepdive/02_generalization)
+3. [Introduction to TensorFlow](courses/machine_learning/deepdive/03_tensorflow)
+4. [Feature Engineering](courses/machine_learning/deepdive/04_features)
+5. [Art and Science of ML](courses/machine_learning/deepdive/05_artandscience)
+6. [End-to-end machine learning on Structured Data](courses/machine_learning/deepdive/06_structured)
+7. Production ML models
+8. [Image Classification Models in TensorFlow](courses/machine_learning/deepdive/08_image)
+9. [Sequence Models for Time-Series and Text problems](courses/machine_learning/deepdive/09_sequence)
+10. [Recommendation Engines using TensorFlow](courses/machine_learning/deepdive/10_recommend)
+
+
+
+### Blog posts/
+
+
