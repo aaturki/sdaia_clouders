@@ -19,6 +19,45 @@ Tips and tricks:
 - Be specific and limit the size of the VPC firewall rule source ranges.
 - Overly permissive permissions will not be marked correct.
 
+
+# Note: 
+The Last Task: **SSH to bastion host via IAP and juice-shop via bastion**
+- Open https://console.cloud.google.com/compute/instances 
+- Click ssh terminal on bastion vm, run ssh twice in the terminal browser dialog:
+
+	> ssh 192.168.11.2
+
+	> exit
+
+	> ssh 192.168.11.2
+
+
+# using Cloudshell
+> git clone https://github.com/gablooge/GSP322.git
+
+> cd GSP322
+
+> sudo chmod +x cloudshell.sh
+
+> ./cloudshell.sh
+
+
+# using gcloud SDK Client
+## Terminal 1
+> git clone https://github.com/gablooge/GSP322.git
+
+> cd GSP322
+
+> sudo chmod +x 1.sh
+
+> ./1.sh
+
+
+## Terminal 2 for gcloud authentication
+> gcloud init
+
+
+
 ## Solving tasks
 
 ### Task 1: Check the firewall rules. Remove the overly permissive rules.
